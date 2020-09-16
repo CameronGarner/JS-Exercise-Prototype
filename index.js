@@ -39,10 +39,37 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-
+function Person(name,age) {
+this.name = name;
+this.age = age;
+this.stomach = [];
 }
 
+Person.prototype.eat = function(food){
+  if(this.stomach.length < 10){
+    this.stomach.push(food);
+  }
+}
+
+Person.prototype.poop = function(){
+  this.stomach = [];
+}
+
+Person.prototype.toString = function(){
+  return `${this.name}, ${this.age}`;
+}
+
+let person1 = new Person("Cameron", 21);
+
+person1.eat("hamburger")
+
+console.log(person1.stomach)
+
+person1.poop()
+
+console.log(person1.stomach)
+
+console.log(person1.toString())
 /*
   TASK 2
     - Write a Car constructor that initializes `model` and `milesPerGallon` from arguments.
@@ -57,10 +84,23 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model,mpg) {
+this.model = model;
+this.mpg = mpg;
+this.tank = 0;
+this.odometer = 0;
 }
 
+Car.prototype.fill = function(gallons){
+ this.tank = (this.tank + gallons);
+ return Honda1
+}
+
+let Honda1 = new Car("civic",38);
+
+console.log(Honda1)
+
+console.log(Honda1.fill(30))
 /*
   TASK 3
     - Write a Baby constructor subclassing Person.
@@ -68,18 +108,32 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
-
+function Baby(name,age,favoritetoy) {
+  Person.call(this,name,age)
+  this.favoritetoy = favoritetoy;
 }
+
+Baby.prototype = Object.create(Person.prototype)
+
+Baby.prototype.play = function(){
+  return `Playing with ${this.favoritetoy}`;
+}
+
+let newborn = new Baby("Henry",1,"ball")
+
+console.log(newborn.toString())
+
+
+console.log(newborn.play())
 
 /* 
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. window binding - this refers to the window
+  2. implicit binding - this refers to the object preceding the period when calling a function
+  3. explicit binding - whenever the call,apply or bind methods are used, this is explicitly defined
+  4. new binding - this refers to the object created by a constructor function
 */
 
 
